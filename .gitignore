@@ -1,5 +1,8 @@
-# Dotnet-XYZ Educational Project © 2021
+# Dotnet-XYZ © 2021
 
+.vs
 bin
 obj
 TestResults
+
+*.csproj.user

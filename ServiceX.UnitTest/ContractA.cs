@@ -1,6 +1,5 @@
 // Dotnet-XYZ © 2021
 
-using DotnetXYZ.ServiceX;
 using DotnetXYZ.ServiceX.Api;
 using DotnetXYZ.ServiceX.Mock;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,7 +64,7 @@ namespace DotnetXYZ.ServiceX.UnitTest
 			var model1 = new ModelA
 			{
 				Id = Guid.NewGuid(),
-				Time = DateTime.UtcNow,
+				Time = UtcNowLowResolution(),
 				Data = "ModelA.Data",
 			};
 			await ContractA.CreateAsync(model1, CancellationToken.None);
@@ -86,10 +85,11 @@ namespace DotnetXYZ.ServiceX.UnitTest
 			var model1 = new ModelA
 			{
 				Id = Guid.NewGuid(),
-				Time = DateTime.UtcNow,
+				Time = UtcNowLowResolution(),
 				Data = "ModelA.Data",
 			};
 			await ContractA.CreateAsync(model1, CancellationToken.None);
+			model1.Time = model1.Time.AddSeconds(1);
 			model1.Data += ".Updated";
 			await ContractA.UpdateAsync(model1, CancellationToken.None);
 			ModelA model2 = await ContractA.GetAsync(model1.Id, CancellationToken.None);
@@ -129,6 +129,14 @@ namespace DotnetXYZ.ServiceX.UnitTest
 		{
 			await Assert.ThrowsExceptionAsync<ContractAIdNotFoundException>(
 				async () => await ContractA.DeleteAsync(Guid.NewGuid(), CancellationToken.None));
+		}
+
+		// DateTime resolution in C# is higher than in PostgreSQL for example.
+		private static DateTime UtcNowLowResolution()
+		{
+			return new DateTime(
+				DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond * TimeSpan.TicksPerMillisecond,
+				DateTimeKind.Utc);
 		}
 	}
 }

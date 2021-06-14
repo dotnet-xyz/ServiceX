@@ -16,7 +16,10 @@ namespace DotnetXYZ.ServiceX.Mock
 		{
 			try
 			{
-				_storage.Add(model.Id, model.Clone());
+				lock (_storage)
+				{
+					_storage.Add(model.Id, model.Clone());
+				}
 			}
 			catch (ArgumentException e)
 			{
