@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceX", "ServiceX\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceX.UnitTest", "ServiceX.UnitTest\ServiceX.UnitTest.csproj", "{F8919CE0-0668-4322-AC6D-2F429C5FEDFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceX.Pgsql", "ServiceX.Pgsql\ServiceX.Pgsql.csproj", "{CDCF1D91-AB52-42DE-A015-164CA7C63F76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceX.Pgsql", "ServiceX.Pgsql\ServiceX.Pgsql.csproj", "{CDCF1D91-AB52-42DE-A015-164CA7C63F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceX.IntegrationTest", "ServiceX.IntegrationTest\ServiceX.IntegrationTest.csproj", "{C142F32D-FAFD-4919-AF91-8527755F4769}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CDCF1D91-AB52-42DE-A015-164CA7C63F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDCF1D91-AB52-42DE-A015-164CA7C63F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDCF1D91-AB52-42DE-A015-164CA7C63F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C142F32D-FAFD-4919-AF91-8527755F4769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C142F32D-FAFD-4919-AF91-8527755F4769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C142F32D-FAFD-4919-AF91-8527755F4769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C142F32D-FAFD-4919-AF91-8527755F4769}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,6 +11,7 @@
   <PropertyGroup>
     <AssemblyName>DotnetXYZ.ServiceX</AssemblyName>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DotnetXYZ.ServiceX</RootNamespace>
   </PropertyGroup>
 
 </Project>

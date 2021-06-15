@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>DotnetXYZ.ServiceX.Api</AssemblyName>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DotnetXYZ.ServiceX.Api</RootNamespace>
   </PropertyGroup>
 
 </Project>

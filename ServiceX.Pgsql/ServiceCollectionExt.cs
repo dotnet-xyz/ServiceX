@@ -9,7 +9,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 {
 	public static class ServiceCollectionExt
 	{
-		public static void AddServiceXPgsql(this IServiceCollection sc, Database.Options options)
+		public static void AddServiceXDataLayerPgsql(this IServiceCollection sc, Database.Options options)
 		{
 			if (options == null)
 			{

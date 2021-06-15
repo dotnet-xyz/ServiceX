@@ -1,12 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>DotnetXYZ.ServiceX.UnitTest</AssemblyName>
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-
-    <RootNamespace>DotnetXYZ.ServiceX.UnitTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceX\ServiceX.csproj" />
     <ProjectReference Include="..\ServiceX.Api\ServiceX.Api.csproj" />
     <ProjectReference Include="..\ServiceX.Mock\ServiceX.Mock.csproj" />
+    <ProjectReference Include="..\ServiceX.Pgsql\ServiceX.Pgsql.csproj" />
+    <ProjectReference Include="..\ServiceX\ServiceX.csproj" />
   </ItemGroup>
 
 </Project>
