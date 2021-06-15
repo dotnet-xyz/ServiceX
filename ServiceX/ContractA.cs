@@ -26,14 +26,14 @@ namespace DotnetXYZ.ServiceX
 			return await _DataLayer.GetAsync(id, ct);
 		}
 
-		public async Task UpdateAsync(ModelA model, CancellationToken ct)
+		public async Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
-			await _DataLayer.UpdateAsync(model, ct);
+			return await _DataLayer.UpdateAsync(model, ct);
 		}
 
-		public async Task DeleteAsync(Guid id, CancellationToken ct)
+		public async Task<int> DeleteAsync(Guid id, CancellationToken ct)
 		{
-			await _DataLayer.DeleteAsync(id, ct);
+			return await _DataLayer.DeleteAsync(id, ct);
 		}
 	}
 }

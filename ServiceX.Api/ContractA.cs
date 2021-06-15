@@ -10,7 +10,7 @@ namespace DotnetXYZ.ServiceX.Api
 	{
 		Task CreateAsync(ModelA model, CancellationToken ct);
 		Task<ModelA> GetAsync(Guid id, CancellationToken ct);
-		Task UpdateAsync(ModelA model, CancellationToken ct);
-		Task DeleteAsync(Guid id, CancellationToken ct);
+		Task<int> UpdateAsync(ModelA model, CancellationToken ct);
+		Task<int> DeleteAsync(Guid id, CancellationToken ct);
 	}
 }

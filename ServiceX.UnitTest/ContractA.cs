@@ -91,13 +91,14 @@ namespace DotnetXYZ.ServiceX.UnitTest
 			await ContractA.CreateAsync(model1, CancellationToken.None);
 			model1.Time = model1.Time.AddSeconds(1);
 			model1.Data += ".Updated";
-			await ContractA.UpdateAsync(model1, CancellationToken.None);
+			int count = await ContractA.UpdateAsync(model1, CancellationToken.None);
+			Assert.AreEqual(1, count);
 			ModelA model2 = await ContractA.GetAsync(model1.Id, CancellationToken.None);
 			Assert.AreEqual(model1, model2);
 		}
 
 		[TestMethod]
-		public async Task Update_Fail_NotFound()
+		public async Task Update_Ok_NotFound()
 		{
 			var model = new ModelA
 			{
@@ -105,8 +106,8 @@ namespace DotnetXYZ.ServiceX.UnitTest
 				Time = DateTime.UtcNow,
 				Data = "ModelA.Data",
 			};
-			await Assert.ThrowsExceptionAsync<ContractAIdNotFoundException>(
-				async () => await ContractA.UpdateAsync(model, CancellationToken.None));
+			int count = await ContractA.UpdateAsync(model, CancellationToken.None);
+			Assert.AreEqual(0, count);
 		}
 
 		[TestMethod]
@@ -119,16 +120,17 @@ namespace DotnetXYZ.ServiceX.UnitTest
 				Data = "ModelA.Data",
 			};
 			await ContractA.CreateAsync(model, CancellationToken.None);
-			await ContractA.DeleteAsync(model.Id, CancellationToken.None);
+			int count = await ContractA.DeleteAsync(model.Id, CancellationToken.None);
+			Assert.AreEqual(1, count);
 			model = await ContractA.GetAsync(model.Id, CancellationToken.None);
 			Assert.IsNull(model);
 		}
 
 		[TestMethod]
-		public async Task Delete_Fail_NotFound()
+		public async Task Delete_Ok_NotFound()
 		{
-			await Assert.ThrowsExceptionAsync<ContractAIdNotFoundException>(
-				async () => await ContractA.DeleteAsync(Guid.NewGuid(), CancellationToken.None));
+			int count = await ContractA.DeleteAsync(Guid.NewGuid(), CancellationToken.None);
+			Assert.AreEqual(0, count);
 		}
 
 		// DateTime resolution in C# is higher than in PostgreSQL for example.

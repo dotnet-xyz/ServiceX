@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="n1oebs3m.hxd~" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.2.16" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.2.16" />
     <PackageReference Include="Npgsql" Version="5.0.7" />

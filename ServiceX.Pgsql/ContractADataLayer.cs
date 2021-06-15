@@ -85,7 +85,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			return From(reader);
 		}
 
-		public async Task UpdateAsync(ModelA model, CancellationToken ct)
+		public async Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
 			using NpgsqlConnection connection = await _Database.ConnectAsync(ct);
 			using var command = new NpgsqlCommand(
@@ -100,14 +100,10 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			command.Parameters.AddWithValue("Data", NpgsqlDbType.Varchar, model.Data);
 			await command.PrepareAsync(ct);
 
-			int count = await command.ExecuteNonQueryAsync(ct);
-			if (count == 0)
-			{
-				throw new ContractAIdNotFoundException(model.Id, null);
-			}
+			return await command.ExecuteNonQueryAsync(ct);
 		}
 
-		public async Task DeleteAsync(Guid id, CancellationToken ct)
+		public async Task<int> DeleteAsync(Guid id, CancellationToken ct)
 		{
 			using NpgsqlConnection connection = await _Database.ConnectAsync(ct);
 			using var command = new NpgsqlCommand(
@@ -118,11 +114,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			command.Parameters.AddWithValue("Id", NpgsqlDbType.Uuid, id);
 			await command.PrepareAsync(ct);
 
-			int count = await command.ExecuteNonQueryAsync(ct);
-			if (count == 0)
-			{
-				throw new ContractAIdNotFoundException(id, null);
-			}
+			return await command.ExecuteNonQueryAsync(ct);
 		}
 	}
 }

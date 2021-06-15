@@ -38,29 +38,28 @@ namespace DotnetXYZ.ServiceX.Mock
 			return Task.FromResult<ModelA>(model?.Clone());
 		}
 
-		public Task UpdateAsync(ModelA model, CancellationToken ct)
+		public Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
+			int count = 0;
 			lock (_storage)
 			{
-				if (!_storage.ContainsKey(model.Id))
+				if (_storage.ContainsKey(model.Id))
 				{
-					throw new ContractAIdNotFoundException(model.Id, null);
+					_storage[model.Id] = model.Clone();
+					count = 1;
 				}
-				_storage[model.Id] = model.Clone();
 			}
-			return Task.CompletedTask;
+			return Task.FromResult(count);
 		}
 
-		public Task DeleteAsync(Guid id, CancellationToken ct)
+		public Task<int> DeleteAsync(Guid id, CancellationToken ct)
 		{
+			int count = 0;
 			lock (_storage)
 			{
-				if (!_storage.Remove(id))
-				{
-					throw new ContractAIdNotFoundException(id, null);
-				}
+				count = _storage.Remove(id) ? 1 : 0;
 			}
-			return Task.CompletedTask;
+			return Task.FromResult(count);
 		}
 	}
 }
