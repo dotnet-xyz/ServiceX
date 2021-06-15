@@ -2,7 +2,6 @@
 
 using DotnetXYZ.ServiceX.Api;
 using Npgsql;
-using NpgsqlTypes;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -25,7 +24,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			return new ModelA
 			{
 				Id = record.GetGuid(0),
-				Time = new DateTime(record.GetDateTime(1).Ticks, DateTimeKind.Utc),
+				Time = record.GetDateTimeUtc(1),
 				Data = record.GetString(2)
 			};
 		}
@@ -48,9 +47,9 @@ namespace DotnetXYZ.ServiceX.Pgsql
 					@Id, @Time, @Data
 				);",
 				connection);
-			command.Parameters.AddWithValue("Id", NpgsqlDbType.Uuid, model.Id);
-			command.Parameters.AddWithValue("Time", NpgsqlDbType.Timestamp, model.Time);
-			command.Parameters.AddWithValue("Data", NpgsqlDbType.Varchar, model.Data);
+			command.Parameters.Add("Id", model.Id);
+			command.Parameters.Add("Time", model.Time);
+			command.Parameters.Add("Data", model.Data);
 			await command.PrepareAsync(ct);
 
 			try
@@ -74,7 +73,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 				WHERE
 					""Id"" = @Id;",
 				connection);
-			command.Parameters.AddWithValue("Id", NpgsqlDbType.Uuid, id);
+			command.Parameters.Add("Id", id);
 			await command.PrepareAsync(ct);
 
 			using DbDataReader reader = await command.ExecuteReaderAsync(ct);
@@ -95,9 +94,9 @@ namespace DotnetXYZ.ServiceX.Pgsql
 				WHERE
 					""Id"" = @Id;",
 				connection);
-			command.Parameters.AddWithValue("Id", NpgsqlDbType.Uuid, model.Id);
-			command.Parameters.AddWithValue("Time", NpgsqlDbType.Timestamp, model.Time);
-			command.Parameters.AddWithValue("Data", NpgsqlDbType.Varchar, model.Data);
+			command.Parameters.Add("Id", model.Id);
+			command.Parameters.Add("Time", model.Time);
+			command.Parameters.Add("Data", model.Data);
 			await command.PrepareAsync(ct);
 
 			return await command.ExecuteNonQueryAsync(ct);
@@ -111,7 +110,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 				WHERE
 					""Id"" = @Id;",
 				connection);
-			command.Parameters.AddWithValue("Id", NpgsqlDbType.Uuid, id);
+			command.Parameters.Add("Id", id);
 			await command.PrepareAsync(ct);
 
 			return await command.ExecuteNonQueryAsync(ct);
