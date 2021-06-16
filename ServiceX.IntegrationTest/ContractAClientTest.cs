@@ -2,27 +2,25 @@
 
 using DotnetXYZ.ServiceX.Api;
 using DotnetXYZ.ServiceX.Client;
-using DotnetXYZ.ServiceX.Server;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Net.Http;
 
-namespace ServiceX.IntegrationTest
+namespace DotnetXYZ.ServiceX.IntegrationTest
 {
 	[TestClass]
 	public class ContractAClientTest : ContractATestBase
 	{
 		private static IServiceProvider _ServiceProvider;
-		private static WebApplicationFactory<Startup> _ServerFactory;
+		private static ServerFactory _ServerFactory;
 
 		protected override IServiceProvider ServiceProvider => _ServiceProvider;
 
 		[ClassInitialize]
 		public static void Init(TestContext context)
 		{
-			_ServerFactory = new WebApplicationFactory<Startup>();
+			_ServerFactory = new ServerFactory();
 			IServiceCollection services = new ServiceCollection();
 			services.AddSingleton<IContractA>(sp =>
 			{

@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>DotnetXYZ.ServiceX.IntegrationTest</AssemblyName>
+
+    <RootNamespace>DotnetXYZ.ServiceX.IntegrationTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

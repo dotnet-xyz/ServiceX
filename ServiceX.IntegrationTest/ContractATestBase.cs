@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ServiceX.IntegrationTest
+namespace DotnetXYZ.ServiceX.IntegrationTest
 {
 	public abstract class ContractATestBase
 	{

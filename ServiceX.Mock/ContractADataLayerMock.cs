@@ -10,15 +10,15 @@ namespace DotnetXYZ.ServiceX.Mock
 {
 	public class ContractADataLayerMock : IContractADataLayer
 	{
-		private Dictionary<Guid, ModelA> _storage = new Dictionary<Guid, ModelA>();
+		private readonly Dictionary<Guid, ModelA> _Storage = new();
 
 		public Task CreateAsync(ModelA model, CancellationToken ct)
 		{
 			try
 			{
-				lock (_storage)
+				lock (_Storage)
 				{
-					_storage.Add(model.Id, model.Clone());
+					_Storage.Add(model.Id, model.Clone());
 				}
 			}
 			catch (ArgumentException e)
@@ -31,9 +31,9 @@ namespace DotnetXYZ.ServiceX.Mock
 		public Task<ModelA> GetAsync(Guid id, CancellationToken ct)
 		{
 			ModelA model;
-			lock (_storage)
+			lock (_Storage)
 			{
-				_storage.TryGetValue(id, out model);
+				_Storage.TryGetValue(id, out model);
 			}
 			return Task.FromResult<ModelA>(model?.Clone());
 		}
@@ -41,11 +41,11 @@ namespace DotnetXYZ.ServiceX.Mock
 		public Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
 			int count = 0;
-			lock (_storage)
+			lock (_Storage)
 			{
-				if (_storage.ContainsKey(model.Id))
+				if (_Storage.ContainsKey(model.Id))
 				{
-					_storage[model.Id] = model.Clone();
+					_Storage[model.Id] = model.Clone();
 					count = 1;
 				}
 			}
@@ -55,9 +55,9 @@ namespace DotnetXYZ.ServiceX.Mock
 		public Task<int> DeleteAsync(Guid id, CancellationToken ct)
 		{
 			int count = 0;
-			lock (_storage)
+			lock (_Storage)
 			{
-				count = _storage.Remove(id) ? 1 : 0;
+				count = _Storage.Remove(id) ? 1 : 0;
 			}
 			return Task.FromResult(count);
 		}

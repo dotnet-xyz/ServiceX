@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ServiceX.IntegrationTest
+namespace DotnetXYZ.ServiceX.IntegrationTest
 {
 	[TestClass]
 	public class ContractAPgsqlTest : ContractATestBase
