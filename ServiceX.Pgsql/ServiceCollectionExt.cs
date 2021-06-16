@@ -25,7 +25,9 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			});
 			sc.AddSingleton(sp =>
 			{
-				var database = new Database(options, sp.GetService<IMigrationRunner>());
+				using IServiceScope scope = sp.CreateScope();
+				var migrator = scope.ServiceProvider.GetService<IMigrationRunner>();
+				var database = new Database(options, migrator);
 				database.Deploy();
 				return database;
 			});

@@ -7,9 +7,9 @@ namespace DotnetXYZ.ServiceX.Api
 	[Serializable]
 	public class ModelA
 	{
-		public Guid Id;
-		public DateTime Time;
-		public String Data;
+		public Guid Id { get; set; }
+		public DateTime Time { get; set; }
+		public string Data { get; set; }
 
 		public override bool Equals(object obj)
 		{
@@ -30,7 +30,7 @@ namespace DotnetXYZ.ServiceX.Api
 
 		public ModelA Clone()
 		{
-			return this.MemberwiseClone() as ModelA;
+			return MemberwiseClone() as ModelA;
 		}
 	}
 }
