@@ -12,8 +12,14 @@ namespace DotnetXYZ.ServiceX.Mock
 	{
 		private readonly Dictionary<Guid, ModelA> _Storage = new();
 
+		public delegate void CreateAsyncEvent(ContractADataLayerMock mock, ModelA model, CancellationToken ct);
+
+		public event CreateAsyncEvent BeforeCreateAsync;
+
 		public Task CreateAsync(ModelA model, CancellationToken ct)
 		{
+			BeforeCreateAsync?.Invoke(this, model, ct);
+
 			try
 			{
 				lock (_Storage)
@@ -28,8 +34,14 @@ namespace DotnetXYZ.ServiceX.Mock
 			return Task.CompletedTask;
 		}
 
+		public delegate void GetAsyncEvent(ContractADataLayerMock mock, Guid id, CancellationToken ct);
+
+		public event GetAsyncEvent BeforeGetAsync;
+
 		public Task<ModelA> GetAsync(Guid id, CancellationToken ct)
 		{
+			BeforeGetAsync?.Invoke(this, id, ct);
+
 			ModelA model;
 			lock (_Storage)
 			{
@@ -38,8 +50,14 @@ namespace DotnetXYZ.ServiceX.Mock
 			return Task.FromResult<ModelA>(model?.Clone());
 		}
 
+		public delegate void UpdateAsyncEvent(ContractADataLayerMock mock, ModelA model, CancellationToken ct);
+
+		public event UpdateAsyncEvent BeforeUpdateAsync;
+
 		public Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
+			BeforeUpdateAsync?.Invoke(this, model, ct);
+
 			int count = 0;
 			lock (_Storage)
 			{
@@ -52,8 +70,14 @@ namespace DotnetXYZ.ServiceX.Mock
 			return Task.FromResult(count);
 		}
 
+		public delegate void DeleteAsyncEvent(ContractADataLayerMock mock, Guid id, CancellationToken ct);
+
+		public event DeleteAsyncEvent BeforeDeleteAsync;
+
 		public Task<int> DeleteAsync(Guid id, CancellationToken ct)
 		{
+			BeforeDeleteAsync?.Invoke(this, id, ct);
+
 			int count = 0;
 			lock (_Storage)
 			{

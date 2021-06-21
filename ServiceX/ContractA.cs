@@ -13,11 +13,20 @@ namespace DotnetXYZ.ServiceX
 
 		public ContractA(IContractADataLayer dataLayer)
 		{
-			_DataLayer = dataLayer;
+			_DataLayer = dataLayer ?? throw new ArgumentNullException(nameof(dataLayer));
 		}
 
 		public async Task CreateAsync(ModelA model, CancellationToken ct)
 		{
+			if (model == null)
+			{
+				throw new ArgumentNullException(nameof(model));
+			}
+			if (model.Data == null)
+			{
+				throw new ArgumentException("Data is null", nameof(model));
+			}
+
 			await _DataLayer.CreateAsync(model, ct);
 		}
 
@@ -28,6 +37,15 @@ namespace DotnetXYZ.ServiceX
 
 		public async Task<int> UpdateAsync(ModelA model, CancellationToken ct)
 		{
+			if (model == null)
+			{
+				throw new ArgumentNullException(nameof(model));
+			}
+			if (model.Data == null)
+			{
+				throw new ArgumentException("Data is null", nameof(model));
+			}
+
 			return await _DataLayer.UpdateAsync(model, ct);
 		}
 
