@@ -47,7 +47,7 @@ namespace DotnetXYZ.ServiceX.IntegrationTest
 			var model1 = new ModelA
 			{
 				Id = Guid.NewGuid(),
-				Time = UtcNowLowResolution(),
+				Time = DateTime.UtcNow,
 				Data = "ModelA.Data",
 			};
 			await ContractA.CreateAsync(model1, CancellationToken.None);
@@ -68,7 +68,7 @@ namespace DotnetXYZ.ServiceX.IntegrationTest
 			var model1 = new ModelA
 			{
 				Id = Guid.NewGuid(),
-				Time = UtcNowLowResolution(),
+				Time = DateTime.UtcNow,
 				Data = "ModelA.Data",
 			};
 			await ContractA.CreateAsync(model1, CancellationToken.None);
@@ -114,14 +114,6 @@ namespace DotnetXYZ.ServiceX.IntegrationTest
 		{
 			int count = await ContractA.DeleteAsync(Guid.NewGuid(), CancellationToken.None);
 			Assert.AreEqual(0, count);
-		}
-
-		// DateTime resolution in C# is higher than in PostgreSQL for example.
-		private static DateTime UtcNowLowResolution()
-		{
-			return new DateTime(
-				DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond * TimeSpan.TicksPerMillisecond,
-				DateTimeKind.Utc);
 		}
 	}
 }

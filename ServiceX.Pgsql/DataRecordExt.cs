@@ -9,8 +9,8 @@ namespace DotnetXYZ.ServiceX.Pgsql
 	{
 		public static DateTime GetDateTimeUtc(this IDataRecord record, int ordinal)
 		{
-			DateTime time = record.GetDateTime(ordinal);
-			return new DateTime(time.Ticks, DateTimeKind.Utc);
+			long ticks = record.GetInt64(ordinal);
+			return new DateTime(ticks, DateTimeKind.Utc);
 		}
 	}
 }

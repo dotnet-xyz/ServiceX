@@ -14,7 +14,7 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			{
 				throw new ArgumentException("DateTime must have UTC kind.", nameof(value));
 			}
-			return collection.AddWithValue(name, NpgsqlDbType.Timestamp, value);
+			return collection.AddWithValue(name, NpgsqlDbType.Bigint, value.Ticks);
 		}
 
 		public static NpgsqlParameter Add(this NpgsqlParameterCollection collection, string name, Guid value)

@@ -11,7 +11,8 @@ namespace DotnetXYZ.ServiceX.Pgsql.Migrations
 		{
 			Create.Table("ModelA")
 				.WithColumn("Id").AsGuid().PrimaryKey()
-				.WithColumn("Time").AsDateTime()
+				// Store Time as Int64 to keep .NET DateTime resolution.
+				.WithColumn("Time").AsInt64()
 				.WithColumn("Data").AsString();
 		}
 
