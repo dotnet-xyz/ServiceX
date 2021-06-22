@@ -4,6 +4,7 @@
     <AssemblyName>DotnetXYZ.ServiceX.Api</AssemblyName>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>DotnetXYZ.ServiceX.Api</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
