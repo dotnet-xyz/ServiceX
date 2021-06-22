@@ -23,3 +23,5 @@ jobs:
       run: dotnet build --configuration Release --no-restore /p:Version=1.0.${{ github.run_number }}
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal ServiceX.UnitTest
+    - name: NuGet push
+      run: dotnet nuget push **/*.nupkg --api-key ${{ github.token }} --source https://nuget.pkg.github.com/dotnet-xyz/index.json --no-symbols
