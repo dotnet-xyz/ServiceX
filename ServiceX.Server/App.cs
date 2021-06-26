@@ -1,4 +1,4 @@
-// Dotnet-XYZ © 2021
+// Dotnet-XYZ Â© 2021
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
