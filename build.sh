@@ -9,6 +9,7 @@ POSTGRES_VERSION=13.3
 
 docker run \
 	--name=postgres \
+	--tty \
 	-d --rm \
 	-e "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" \
 	--network=host \

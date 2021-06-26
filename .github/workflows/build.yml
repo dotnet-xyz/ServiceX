@@ -23,3 +23,9 @@ jobs:
         SERVICE_REPOSITORY_URL=https://github.com/${{ github.repository }}
         SERVICE_VERSION=1.0.${{ github.run_number }}
         sh build.sh
+    - name: docker login
+      run: docker login --username=${{ github.actor }} --password=${{ github.token }} ghcr.io
+    - name: docker tag
+      run: docker tag ${{ github.repository }}:1.0.${{ github.run_number }} ghcr.io/${{ github.repository }}:1.0.${{ github.run_number }}
+    - name: docker push
+      run: docker push ghcr.io/${{ github.repository }}:1.0.${{ github.run_number }}
