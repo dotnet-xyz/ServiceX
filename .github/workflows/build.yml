@@ -26,6 +26,6 @@ jobs:
     - name: docker login
       run: docker login --username=${{ github.actor }} --password=${{ github.token }} ghcr.io
     - name: docker tag
-      run: docker tag ${{ github.repository }}:1.0.${{ github.run_number }} ghcr.io/${{ github.repository }}:1.0.${{ github.run_number }}
+      run: docker tag dotnet-xyz/service-x:1.0.${{ github.run_number }} ghcr.io/dotnet-xyz/service-x:1.0.${{ github.run_number }}
     - name: docker push
-      run: docker push ghcr.io/${{ github.repository }}:1.0.${{ github.run_number }}
+      run: docker push ghcr.io/dotnet-xyz/service-x:1.0.${{ github.run_number }}
