@@ -24,7 +24,7 @@ jobs:
         NUGET_SOURCE=https://nuget.pkg.github.com/dotnet-xyz/index.json
         POSTGRES_PASSWORD=P@ssw0rd
         SERVICE_REPOSITORY_URL=https://github.com/${{ github.repository }}
-        sh build.sh
+        bash -x build.sh
     - name: docker login
       run: docker login --username=${{ github.actor }} --password=${{ github.token }} ghcr.io
     - name: docker push
