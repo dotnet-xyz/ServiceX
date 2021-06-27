@@ -8,7 +8,7 @@ set -u
 POSTGRES_VERSION=13.3
 
 # Separate quiet pull for clean build logs.
-docker pull --quiet ${POSTGRES_VERSION}
+docker pull --quiet postgres:${POSTGRES_VERSION}
 
 docker run \
 	--name=postgres \
