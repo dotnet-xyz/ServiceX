@@ -20,12 +20,12 @@ namespace DotnetXYZ.ServiceX.IntegrationTest
 		{
 			IServiceCollection services = new ServiceCollection();
 			services.AddServiceX();
-			services.AddServiceXDataLayerPgsql(new Database.Options
+			services.AddServiceXDataLayerPgsql(options =>
 			{
-				Host = "localhost",
-				Name = "ServiceX.IntegrationTest",
-				User = "postgres",
-				Password = "P@ssw0rd"
+				options.Host = "localhost";
+				options.Name = "ServiceX.IntegrationTest";
+				options.User = "postgres";
+				options.Password = "P@ssw0rd";
 			});
 			_ServiceProvider = services.BuildServiceProvider();
 		}

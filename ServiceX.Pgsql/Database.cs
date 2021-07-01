@@ -1,6 +1,7 @@
 ﻿// Dotnet-XYZ © 2021
 
 using FluentMigrator.Runner;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using NpgsqlTypes;
 using System;
@@ -54,6 +55,11 @@ namespace DotnetXYZ.ServiceX.Pgsql
 			_ConnectionString = _Options.BuildConnectionString();
 			_ConnectionStringNoDB = _Options.BuildConnectionStringNoDB();
 			_MigrationRunner = mr ?? throw new ArgumentNullException(nameof(mr));
+		}
+
+		public Database(IOptions<Options> options, IMigrationRunner mr) :
+			this(options?.Value, mr)
+		{
 		}
 
 		public string Name => _Options.Name;

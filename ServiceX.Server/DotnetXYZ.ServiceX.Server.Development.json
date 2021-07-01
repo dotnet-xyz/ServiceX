@@ -1,0 +1,10 @@
+{
+	"DotnetXYZ.ServiceX.Pgsql": {
+		"Database": {
+			"Host": "localhost",
+			"Name": "DotnetXYZ.ServiceX",
+			"User": "postgres",
+			"Password": "P@ssw0rd"
+		}
+	}
+}
